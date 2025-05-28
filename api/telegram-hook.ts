@@ -14,20 +14,20 @@ const bot = new Telegraf(BOT_TOKEN);
 export async function handleStartCommand(ctx) {
   const COMMAND = "/start";
   const { message } = ctx;
-  const channelUrl = "t.me/hq_proxies"
+  const channelUrl = "t.me/tb_proxies"
 
   // Welcome message with Markdown formatting
   const reply = `
-  🔥 Supercharge Your Proxy Power — 100% FREE! 🔥
-Say goodbye to limits. Get instant access to Residential Socks5 & Mobile Proxies — no trials, no payments, just pure performance.
+  🔥 Unlock 100% Free VPN Access — No Limits, No Trials 🔥
+Enjoy fast, secure, and private VPN connections with zero cost. No sign-ups. No restrictions.
 
-🌍 30M+ Verified Clean IPs — zero fraud, zero hassle
-📍 Pinpoint Geo-Targeting — rule any region, anytime
-⚡ Blazing 4G Speeds — fast, stable, unstoppable
-🖥️ RDPs Launching Soon — your next-level toolkit is coming
+🌍 Connect to global servers instantly
+🔒 Stay safe on public Wi-Fi and protect your data
+⚡ High-speed performance for smooth browsing
+📱 Works on all devices — anytime, anywhere
 
-🚀 Don’t wait. Join the channel now:
-🔗 [Tap to join Mobile Proxies](${channelUrl})
+🚀 Ready to browse without borders?
+🔗 [Tap to Turbo Free VPNS](${channelUrl})
 `;
 
   try {
@@ -37,7 +37,7 @@ Say goodbye to limits. Get instant access to Residential Socks5 & Mobile Proxies
     inline_keyboard: [
       [
         {
-          text: "🚀 Join Mobile Proxies Channel Now!",
+          text: "🚀 Join  Turbo Free VPNS Now!",
           url: channelUrl
         },
       ],
@@ -75,6 +75,7 @@ export default async (req: VercelRequest, res: VercelResponse) => {
     console.error("Error handling Telegram update:", error.toString());
   }
 
+  //s
   // Acknowledge the request with Telegram
   res.status(200).send("OK");
 };
