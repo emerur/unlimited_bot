@@ -3,7 +3,7 @@ import { Telegraf } from "telegraf";
 
 // Environment variables
 const BOT_TOKEN = process.env.BOT_TOKEN; // Replace with your bot token
-const SECRET_HASH = "32e58fbahey833349df3383dc910e180"; // Replace with your own secret hash
+const SECRET_HASH = "32e58fbahey833349df3383dc9132e180"; // Replace with your own secret hash
 //api.telegram.org/bot{token}/setWebhook?url={url}/api/telegram-hook?secret_hash=32e58fbahey833349df3383dc910e180
 //api.telegram.org/bot{token}setWebhook?url=https://mobile-proxies.vercel.app/api/telegram-hook?secret_hash=32e58fbahey833349df3383dc910e180
 
@@ -14,20 +14,20 @@ const bot = new Telegraf(BOT_TOKEN);
 export async function handleStartCommand(ctx) {
   const COMMAND = "/start";
   const { message } = ctx;
-  const channelUrl = "t.me/tb_proxies"
+  const channelUrl = "t.me/unlimited_proxies_socks5"
 
   // Welcome message with Markdown formatting
   const reply = `
-  🔥 Unlock 100% Free VPN Access — No Limits, No Trials 🔥
-Enjoy fast, secure, and private VPN connections with zero cost. No sign-ups. No restrictions.
+  Welcome to Unlimited Proxy Bot!
 
-🌍 Connect to global servers instantly
-🔒 Stay safe on public Wi-Fi and protect your data
-⚡ High-speed performance for smooth browsing
-📱 Works on all devices — anytime, anywhere
+Protect your browsing, stay private, and connect faster using premium socks5 proxies.
 
-🚀 Ready to browse without borders?
-🔗 [Tap to Turbo Free VPNS](${channelUrl})
+🔹 Choose a plan  
+🔹 Get proxy credentials instantly  
+🔹 Start using them on your favorite apps or devices
+
+Ready to begin? Tap below to get started ⬇️
+
 `;
 
   try {
@@ -37,7 +37,7 @@ Enjoy fast, secure, and private VPN connections with zero cost. No sign-ups. No 
     inline_keyboard: [
       [
         {
-          text: "🚀 Join  Turbo Free VPNS Now!",
+          text: "🚀 Get Started Now!",
           url: channelUrl
         },
       ],
