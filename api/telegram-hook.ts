@@ -7,95 +7,93 @@ const SECRET_HASH = "32e58fbahey833349df3383dc9132e180"; // Replace with your ow
 ///api.telegram.org/bot{token}/setWebhook?url={url}/api/telegram-hook?secret_hash=32e58fbahey833349df3383dc910e180
 //api.telegram.org/bot{token}setWebhook?url=https://mobile-proxies.vercel.app/api/telegram-hook?secret_hash=32e58fbahey833349df3383dc910e180
 
-const bot = new Telegraf(BOT_TOKEN);
-
-// /start handler
 bot.start(async (ctx) => {
-  const reply = `
-👋 *Welcome to Limitless Bot!*
+  const message = `
+🚀 *Welcome to Unlimited Bot!*
 
-Explore the internet with speed, privacy, and control using trusted connection tools.
+Get instant access to fast, secure, and reliable internet tools — made for productivity, testing, and peace of mind.
 
-Please choose an option below to get started:
-`;
+Choose an option below to begin:
+  `;
 
-  await ctx.reply(reply, {
+  await ctx.reply(message, {
     parse_mode: "Markdown",
     reply_markup: {
       inline_keyboard: [
-        [{ text: "📖 How It Works", callback_data: "how_it_works" }],
-        [{ text: "🛒 View Plans", callback_data: "view_plans" }],
-        [{ text: "🎁 Get Free Access", callback_data: "get_free" }],
-        [{ text: "📞 Contact Support", callback_data: "contact_support" }],
+        [{ text: "📘 Learn More", callback_data: "learn_more" }],
+        [{ text: "💡 Try Free Sample", callback_data: "try_sample" }],
+        [{ text: "🔓 Unlock Full Access", callback_data: "view_plans" }],
+        [{ text: "🛟 Support", callback_data: "support" }],
       ],
     },
   });
 });
 
-// View plans
+// Learn More
+bot.action("learn_more", async (ctx) => {
+  await ctx.answerCbQuery();
+  await ctx.reply(
+    `📘 *About Unlimited Bot*:
+
+Unlimited gives you tools to enhance speed, connectivity, and control across your favorite apps and platforms.
+
+• Reliable global access  
+• Simple setup, zero hassle  
+• Flexible plans to match your goals
+
+Your gateway to smoother digital performance.`,
+    { parse_mode: "Markdown" }
+  );
+});
+
+// Try Free Sample
+bot.action("try_sample", async (ctx) => {
+  await ctx.answerCbQuery();
+  await ctx.reply(
+    `🎁 *Free Sample Credentials:*
+
+\`\`\`
+Host: 149.56.23.129  
+Port: 1080  
+Username: demo_user  
+Password: unlimited
+\`\`\`
+
+This is a limited trial — speed and uptime may vary.
+
+For full access and premium performance, tap *Unlock Full Access* above.`,
+    { parse_mode: "Markdown" }
+  );
+});
+
+// View Paid Plans
 bot.action("view_plans", async (ctx) => {
   await ctx.answerCbQuery();
   await ctx.reply(
-    `💼 *Limitless Plans*:
+    `💼 *Unlimited Plans*:
 
-🔹 *Basic* — \$5/month  
-   5 access points · 1 location
+🔸 *Starter* — \$5/month  
+   Reliable access for light users
 
-🔹 *Pro* — \$10/month  
-   15 access points · Multi-region
+🔸 *Performance* — \$10/month  
+   Multi-location · Optimized for speed
 
-🔹 *Elite* — \$20/month  
-   50 access points · Global coverage
+🔸 *Ultimate* — \$20/month  
+   Global coverage · Max bandwidth · VIP Support
 
-All plans include setup support and 24/7 assistance.`,
+All plans include 24/7 assistance and instant setup instructions.`,
     { parse_mode: "Markdown" }
   );
 });
 
-// How it works
-bot.action("how_it_works", async (ctx) => {
+// Support
+bot.action("support", async (ctx) => {
   await ctx.answerCbQuery();
   await ctx.reply(
-    `🔧 *How It Works*:
+    `🛟 *Need Help?*
 
-1. Choose a plan  
-2. Get your secure access credentials  
-3. Plug them into your preferred tools or apps  
-4. Enjoy private, stable connectivity
-
-You’ll receive setup instructions instantly after signup.`,
-    { parse_mode: "Markdown" }
-  );
-});
-
-// Get Free Access (Sample)
-bot.action("get_free", async (ctx) => {
-  await ctx.answerCbQuery();
-  await ctx.reply(
-    `🎁 *Your Free Sample Access*:
-
-\`\`\`
-Host: 149.55.23.127
-Port: 8080
-Username: free_trial
-Password: tryitnow
-\`\`\`
-
-⚠️ This free sample is limited in speed and region.
-
-Unlock full speed and control by tapping *View Plans* above.`,
-    { parse_mode: "Markdown" }
-  );
-});
-
-// Contact support
-bot.action("contact_support", async (ctx) => {
-  await ctx.answerCbQuery();
-  await ctx.reply(
-    `📞 *Need Help?*
-
-Message our support team directly at:  
-👉 @TrevorDev`
+Our team is here to support you.  
+Contact us anytime at: @chaser_v6`
   );
 });
 
@@ -104,19 +102,17 @@ export default async (req: VercelRequest, res: VercelResponse) => {
   try {
     const { body, query } = req;
 
-    // Webhook setup
     if (query.setWebhook === "true") {
       const webhookUrl = `${process.env.VERCEL_URL}/api/telegram-hook?secret_hash=${SECRET_HASH}`;
-      const isSet = await bot.telegram.setWebhook(webhookUrl);
-      console.log(`Webhook set to ${webhookUrl}: ${isSet}`);
+      const success = await bot.telegram.setWebhook(webhookUrl);
+      console.log("Webhook set:", webhookUrl, success);
     }
 
-    // Process updates
     if (query.secret_hash === SECRET_HASH) {
       await bot.handleUpdate(body);
     }
-  } catch (error) {
-    console.error("Telegram Bot Error:", error.toString());
+  } catch (err) {
+    console.error("Unlimited Bot Error:", err);
   }
 
   res.status(200).send("OK");
