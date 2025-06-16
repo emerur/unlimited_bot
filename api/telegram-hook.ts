@@ -7,6 +7,8 @@ const SECRET_HASH = "32e58fbahey833349df3383dc9132e180"; // Replace with your ow
 ///api.telegram.org/bot{token}/setWebhook?url={url}/api/telegram-hook?secret_hash=32e58fbahey833349df3383dc910e180
 //api.telegram.org/bot{token}setWebhook?url=https://mobile-proxies.vercel.app/api/telegram-hook?secret_hash=32e58fbahey833349df3383dc910e180
 
+const bot = new Telegraf(BOT_TOKEN);
+
 bot.start(async (ctx) => {
   const message = `
 🚀 *Welcome to Unlimited Bot!*
