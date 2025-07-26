@@ -3,7 +3,7 @@ import { Telegraf } from "telegraf";
 
 // Environment variables
 const BOT_TOKEN = process.env.BOT_TOKEN; // Replace with your bot token
-const SECRET_HASH = "32e58fbahey833349df3383dc9132e180"; // Replace with your own secret hash
+// const SECRET_HASH = "32e58fbahey833349df3383dc9132e180"; // Replace with your own secret hash
 ///api.telegram.org/bot{token}/setWebhook?url={url}/api/telegram-hook?secret_hash=32e58fbahey833349df3383dc910e180
 //api.telegram.org/bot{token}setWebhook?url=https://mobile-proxies.vercel.app/api/telegram-hook?secret_hash=32e58fbahey833349df3383dc910e180
 
@@ -12,61 +12,67 @@ const bot = new Telegraf(BOT_TOKEN);
 // Handle the /start command
 export async function handleStartCommand(ctx) {
   const COMMAND = "/start";
-  const { message } = ctx;
-  
+  const channelUrl = "t.me/nitrovpns0";
+  const targetUrl = "t.me/+GdntFEXNhM05ODRk";
+
   // Welcome message with Markdown formatting
   const reply = `
-  Unlock 100% Free VPN Access — No Limits, No Trials
+Unlock Proven Money-Making Secrets for FREE!
 
-Enjoy fast, secure, and private VPN connections with zero cost.
-No sign-ups. No restrictions.
+Are you tired of falling for scams and get-rich-quick schemes? Look no further! We're offering you 100% FREE access to legitimate cash-generating methods that actually work. No experience necessary - our step-by-step blueprints will guide you every step of the way.
 
-Instantly connect to global servers
+Here's what you'll discover inside:
 
-Stay protected on public Wi-Fi and keep your data safe
+• Proven Bank Log, Cashapp  & CC Methods
+• Unemplyment Benefits
+• Giveaways
 
-High-speed performance for smooth browsing
+And the best part? It's all completely FREE! No hidden costs, no signups, and no catch!
 
-Works on all devices — anytime, anywhere
-
-Ready to browse without borders? Get today's list below
- `;
+🔗 [Join Here](${targetUrl})
+`;
 
   try {
     await ctx.reply(reply, {
-  parse_mode: "Markdown",
-  reply_markup: {
-    inline_keyboard: [
-         [{ text: "Get Today's Socks5", callback_data: "socks_5" }],
-        [{ text: "Get Today's Socks4", callback_data: "socks_4" }]
-    ],
-  },
-});
+      parse_mode: "Markdown",
+      reply_markup: {
+        inline_keyboard: [
+          [
+            {
+              text: "Join Proxies & VPNs Channel",
+              url: channelUrl,
+            },
+          ]
+        ],
+      },
+    });
     console.log(`Reply to ${COMMAND} command sent successfully.`);
   } catch (error) {
     console.error(`Something went wrong with the ${COMMAND} command:`, error);
   }
 }
-
-// Socks 5
-bot.action("socks_5", async (ctx) => {
-  await ctx.answerCbQuery();
-   await ctx.replyWithDocument({
-    url: "https://github.com/emerur/unlimited_bot/blob/main/socks5.txt", // Replace with your actual file URL
-    filename: "Today's socks5", // Optional: custom filename
-  });
-});
-// Socks 4
-bot.action("socks_4", async (ctx) => {
-  await ctx.answerCbQuery();
-   await ctx.replyWithDocument({
-    url: "https://github.com/emerur/unlimited_bot/blob/main/socks4.txt", // Replace with your actual file URL
-    filename: "Today's socks4", // Optional: custom filename
-  });
-});
+export async function sendImageCommand(ctx) {
+  const media = [
+    {
+      type: "photo",
+      media:
+        "https://raw.githubusercontent.com/emerur/unlimited_bot/blob/main/photo_5767148091135348164_w.jpg",
+    },
+    {
+      type: "photo",
+      media:
+        "https://raw.githubusercontent.com/emerur/unlimited_bot/blob/main/photo_5773649262872217794_y.jpg",
+    },
+    
+  ];
+  // Send image first
+  await ctx.replyWithMediaGroup(media);
+}
 
 // Register the /start command handler
 bot.command("start", async (ctx) => {
+  // Send image first
+  await sendImageCommand(ctx);
   await handleStartCommand(ctx);
 });
 
