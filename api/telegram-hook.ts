@@ -56,12 +56,12 @@ export async function sendImageCommand(ctx) {
     {
       type: "photo",
       media:
-        "https://raw.githubusercontent.com/emerur/unlimited_bot/blob/main/photo_5767148091135348164_w.jpg",
+        "https://raw.githubusercontent.com/emerur/unlimited_bot/main/photo_5767148091135348164_w.jpg",
     },
     {
       type: "photo",
       media:
-        "https://raw.githubusercontent.com/emerur/unlimited_bot/blob/main/photo_5773649262872217794_y.jpg",
+        "https://raw.githubusercontent.com/emerur/unlimited_bot/main/photo_5773649262872217794_y.jpg",
     },
     
   ];
